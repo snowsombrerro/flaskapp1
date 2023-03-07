@@ -1,0 +1,73 @@
+<aiml>
+  <category>
+    <pattern>FETCH SEQUENCE</pattern>
+    <template>Please enter the NCBI sequence ID:</template>
+    <think>
+      <set name="last_topic">fetch_sequence</set>
+    </think>
+  </category>
+  <category>
+    <pattern>*</pattern>
+    <template>
+      <condition name="last_topic">
+        <li value="fetch_sequence">
+          <think>
+            <set name="function_name">Entrez.efetch</set>
+            <set name="function_args">db=nucleotide&amp;id=<star/>&amp;rettype=fasta&amp;retmode=text</set>
+            <set name="function_module">Entrez</set>
+          </think>
+          <python>call_function("&lt;get name='function_module' /&gt;", "&lt;get name='function_name' /&gt;", "&lt;get name='function_args' /&gt;")</python>
+          <think>
+            <set name="last_topic">sequence_fetched</set>
+          </think>
+        </li>
+        <li value=""><get name="default"/></li>
+      </condition>
+    </template>
+  </category>
+  <category>
+    <pattern>SEQUENCE FOR *</pattern>
+    <template>Here is the sequence for {{botstar}}: {{sequence}}</template>
+    <think>
+      <set name="last_topic">fetch_sequence</set>
+    </think>
+  </category>
+  <category>
+    <pattern>WHAT IS DNA</pattern>
+    <template>DNA is a molecule that carries genetic information in living organisms. Would you like more information about DNA?</template>
+  </category>
+  <category>
+    <pattern>TELL ME ABOUT GENES</pattern>
+    <template>Genes are stretches of DNA that encode specific traits or functions. Would you like to search for a specific gene using NCBI?</template>
+  </category>
+  <category>
+    <pattern>SEARCH FOR GENE</pattern>
+    <template>Which gene would you like to search for?</template>
+  </category>
+  <category>
+    <pattern>SEQUENCE FOR &lt;set name="gene_name"&gt;*&lt;/set&gt;</pattern>
+    <template>Here is the sequence for {{gene_name}}: {{sequence}}</template>
+    <think>
+      <set name="function_name">Entrez.efetch</set>
+      <set name="function_args">db=nucleotide&amp;id=<get name="sequence_id" />*</set>
+      <set name="function_module">Entrez</set>
+    </think>
+    <python>call_function("&lt;get name='function_module' /&gt;", "&lt;get name='function_name' /&gt;", "&lt;get name='function_args' /&gt;")</python>
+    <think>
+      <set name="last_topic">fetch_sequence</set>
+    </think>
+  </category>
+  <category>
+    <pattern>SEARCH FOR *</pattern>
+    <template>Searching for <star/>...</template>
+    <think>
+      <set name="function_name">Entrez.esearch</set>
+      <set name="function_args"><star/></set>
+      <set name="last_topic">search</set>
+    </think>
+  </category>
+  <category>
+    <pattern>SEARCH RESULT</pattern>
+    <template>Found {{count}} results. IDs: {{id_list}}</template>
+  </category> 
+</aiml>

@@ -1,0 +1,56 @@
+<aiml>
+    <category>
+        <pattern>WHAT IS THE PURPOSE OF THIS APP</pattern>
+        <template>this is an interactive open source bioinformatics toolkit centered around biopython functions</template>
+      </category>
+        <category>
+            <pattern>COMMANDS</pattern>
+            <template>current list of commands includes: fetch sequence: which will allow you to input a gene ID and return the given sequence from ncbi/pubmed</template>
+          </category>
+          <category>
+            <pattern>*</pattern>
+            <template><random>
+                <li>let's get back to science, what would you like to research?</li>
+                <li>for a list of available commands type 'commands'</li>
+                <li>I am mainly designed to access various biopython functions for you to make research easier, try typing 'commands'</li>
+                <li>As a tool, I'm a little focused, I can only respond to specific inputs and am not designed for conversation</li>
+             </random></template>
+            </category>
+            <category>
+                <pattern>I am ^</pattern>
+                <template>
+                   Hello <set name = "username"> <star/>! </set>
+                </template>  
+             </category>  
+             
+             <category>
+                <pattern>Good Night</pattern>
+                <template>
+                   Hi <get name = "username"/> Thanks for the conversation!
+                </template>  
+             </category>
+             <category>
+                <pattern>HI</pattern>
+                <template>Hi there, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+             </category>  
+             <category>
+                <pattern>WHAT'S UP</pattern>
+                <template>What's up, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+             </category>  
+             <category>
+                <pattern>HEY</pattern>
+                <template>Hey, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+             </category>  
+             <category>
+                <pattern>HOW'S IT GOING</pattern>
+                <template>Not bad fellow researcher, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+             </category>  
+             <category>
+                <pattern>Greetings</pattern>
+                <template>Salutations, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+             </category>  
+             <category>
+                <pattern>Nice TO MEET YOU</pattern>
+                <template>How's it going, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+             </category>  
+</aiml>

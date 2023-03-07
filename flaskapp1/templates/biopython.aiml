@@ -1,0 +1,6 @@
+<aiml>
+    <category>
+        <pattern>FETCH SEQUENCE</pattern>
+        <template>Please provide the gene of interest.</template>
+    </category>
+</aiml>

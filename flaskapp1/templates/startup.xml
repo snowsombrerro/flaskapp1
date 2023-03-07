@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+   <category>
+      <pattern>HELLO</pattern>
+      <template>How's it going, I'm an interactive open source bioinformatics research tool, type commands for a list of commands</template>
+   </category>  
+   <category>
+      <pattern>RESEARCH</pattern>
+      <template>what would you like help researching?</template>
+   </category>
+   <category>
+      <pattern>WHO IS SAGA</pattern>
+      <template>I'm saga, I'm named after the nordic deity, known for wisdom and sometimes referred to as the god of poetry</template>
+   </category>
+   <category>
+      <pattern>GENE</pattern>
+      <template>to research a gene, try the 'fetch sequence' command</template>
+   </category>
+   <category>
+      <pattern>WHAT IS BIOPYTHON</pattern>
+      <template>Biopython is a set of tools for biological computation written in Python. It includes modules for reading and writing various file formats, working with sequence data, and more.</template>
+   </category>
+   <category>
+      <pattern>TELL ME ABOUT SEQUENCE ALIGNMENT</pattern>
+      <template>Sequence alignment is the process of comparing two or more DNA or protein sequences to identify regions of similarity. Biopython includes several modules for performing sequence alignment, including pairwise and multiple sequence alignment.</template>
+   </category>
+   <category>
+      <pattern>HOW DO I TRANSLATE A DNA SEQUENCE TO PROTEIN</pattern>
+      <template>To translate a DNA sequence to protein, you can use the `translate()` function from the Bio.Seq module in Biopython. The function takes a DNA sequence as input and returns the translated protein sequence. Here's an example: `from Bio.Seq import Seq seq = Seq("ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG") protein = seq.translate()`.</template>
+   </category>
+   <category>
+      <pattern>WHAT IS BLAST</pattern>
+      <template>BLAST (Basic Local Alignment Search Tool) is a program for comparing DNA or protein sequences to a database of known sequences. Biopython includes modules for running BLAST searches and parsing the results.</template>
+   </category>
+   <category>
+      <pattern>HOW DO I RUN A BLAST SEARCH</pattern>
+      <template>To run a BLAST search, you can use the `qblast()` function from the Bio.Blast module in Biopython. The function takes a query sequence and a database name as input, and returns the search results. Here's an example: `from Bio.Blast import NCBIWWW result_handle = NCBIWWW.qblast("blastn", "nt", "ATCGACTGACGTCAGT")`.</template>
+   </category>
+   <category>
+      <pattern>WHAT TOOLS ARE AVAILABLE</pattern>
+      <template>I primarily function as a wrapper around biopython functions to make them more accesible, for a detailed list say, 'detailed list'</template>
+   </category>
+   <category>
+      <pattern>DETAILED LIST</pattern>
+      <template>Some Commonly used functions in Biopython are: 
+         SeqIO.parse(): used for reading sequence data files in various formats
+         Seq() and SeqRecord(): used for creating and manipulating sequences and sequence records
+         Entrez.efetch(): used for downloading data from NCBI's Entrez databases
+         Bio.Blast.NCBIWWW.qblast(): used for submitting sequence queries to NCBI's BLAST service
+         Bio.AlignIO: used for reading and writing sequence alignments in various formats
+         Bio.SeqUtils: contains various utilities for working with sequences, such as calculating molecular weights, codon usage, and melting temperature
+      </template>
+   </category>
+   <category>
+      <pattern>*</pattern>
+      <template>
+        <python>
+          <![CDATA[
+            def call_function(module_name, function_name, *args):
+              module = __impohow rt__(module_name)
+              function = getattr(module, function_name)
+              return function(*args)
+          ]]>
+        </python>
+        <condition name="last_topic">
+          <li value="fetch_sequence">
+            <think>
+              <set name="function_name">SeqIO.parse</set>
+              <set name="function_args">"&lt;get name='filename' /&gt;", "&lt;get name='format' /&gt;"</set>
+            </think>
+            Parsing <get name="filename" /> in <get name="format" /> format...
+            <call>python call_function("SeqIO", "parse", "&lt;get name='filename' /&gt;", "&lt;get name='format' /&gt;")</call>
+            <think><set name="last_topic"/></think>
+          </li>
+          <li value=""><get name="default"/></li>
+        </condition>
+      </template>
+    </category>    
+</aiml>
